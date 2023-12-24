@@ -6,10 +6,16 @@ namespace DeserializationLatencyInvestigation.Controllers
     [Route("[controller]")]
     public class LatencyController : ControllerBase
     {
-        [HttpPost(Name = "SomeTestEndpoint")]
-        public async Task<IActionResult> Post([FromBody] TestModel model)
+        [HttpPost("SomeTestEndpoint")]
+        public async Task<IActionResult> SomeTestEndpoint([FromBody] TestModel model)
         {
-            return Ok(model);
+            return Ok();
+        }
+
+        [HttpPost("AnotherTestEndpoint")]
+        public async Task<IActionResult> AnotherTestEndpoint([FromBody] ShortModel model)
+        {
+            return Ok();
         }
     }
 }
