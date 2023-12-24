@@ -1,3 +1,6 @@
+using DeserializationLatencyInvestigation;
+using System.Text.Json.Serialization;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -14,7 +17,8 @@ internal class Program
         //    loggingBuilder.AddDebug();
         //});
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(options =>
+            options.JsonSerializerOptions.AddContext<MyJsonContext>());
 
         builder.Services.AddEndpointsApiExplorer();
         //builder.Services.AddSwaggerGen();
@@ -33,3 +37,6 @@ internal class Program
         app.Run();
     }
 }
+
+[JsonSerializable(typeof(TestModel[]))]
+internal partial class MyJsonContext : JsonSerializerContext { }
